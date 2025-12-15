@@ -1,31 +1,33 @@
-// Local images from resource folder
+// Local images from public folder
+const baseUrl = import.meta.env.BASE_URL;
+
 const images = {
     dol: [
-        '/images/1.jpg',
-        '/images/4.jpg',
-        '/images/5.jpg',
-        '/images/1.jpg',
-        '/images/4.jpg',
-        '/images/5.jpg',
+        `${baseUrl}images/1.jpg`,
+        `${baseUrl}images/4.jpg`,
+        `${baseUrl}images/5.jpg`,
+        `${baseUrl}images/1.jpg`,
+        `${baseUrl}images/4.jpg`,
+        `${baseUrl}images/5.jpg`,
     ],
     place: [
-        '/images/2.jpg',
-        '/images/6.jpg',
-        '/images/2.jpg',
-        '/images/6.jpg',
-        '/images/2.jpg',
-        '/images/6.jpg',
+        `${baseUrl}images/2.jpg`,
+        `${baseUrl}images/6.jpg`,
+        `${baseUrl}images/2.jpg`,
+        `${baseUrl}images/6.jpg`,
+        `${baseUrl}images/2.jpg`,
+        `${baseUrl}images/6.jpg`,
     ],
     hanbok: [
-        '/images/3.png',
-        '/images/3.png',
-        '/images/3.png',
-        '/images/3.png',
-        '/images/3.png',
-        '/images/3.png',
+        `${baseUrl}images/3.png`,
+        `${baseUrl}images/3.png`,
+        `${baseUrl}images/3.png`,
+        `${baseUrl}images/3.png`,
+        `${baseUrl}images/3.png`,
+        `${baseUrl}images/3.png`,
     ],
 };
-// Korean traditional color palettes (fallback)
+
 const palettes = {
     dol: [
         'linear-gradient(145deg, #e8dfd2 0%, #d4c4b0 50%, #c9b89e 100%)',
@@ -52,13 +54,13 @@ const palettes = {
         'linear-gradient(145deg, #f5efe5 0%, #e9e0d4 50%, #ded4c5 100%)',
     ],
 };
-// Tag pools for each category
+
 const tagPools = {
     dol: ['전통', '모던', '플로럴', '심플', '골드', '네추럴', '프리미엄', '미니멀', '럭셔리', '클래식'],
     place: ['호텔', '하우스', '가든', '스튜디오', '뷰포인트', '미니멀', '프라이빗', '한옥', '모던', '클래식'],
     hanbok: ['단아함', '풍성', '모노톤', '파스텔', '자수', '프리미엄', '고급원단', '맞춤', '전통', '모던'],
 };
-// Names for each category
+
 const names = {
     dol: [
         { name: '가온', subtitle: '아기 첫 돌을 위한 섬세한 디테일' },
@@ -109,14 +111,28 @@ const names = {
         { name: '현대 퓨전', subtitle: '모던한 감성의 퓨전 한복' },
     ],
 };
-// Descriptions for each category
+
 const descriptions = {
     dol: '전통 병풍과 단정한 색감을 중심으로 구성된 돌상 스타일입니다. 아이가 주인공이 될 수 있도록 절제된 디자인과 고급스러운 소품을 사용했습니다.',
     place: '잔치 분위기를 풍성하게 살려주는 공간 스타일링입니다. 장소의 특성을 살리면서도 초연만의 감각으로 특별한 순간을 연출해 드립니다.',
     hanbok: '실루엣과 소재의 균형으로 우아함을 강조한 한복입니다. 전통의 아름다움과 현대적인 감각이 조화를 이룬 프리미엄 컬렉션입니다.',
 };
-const makeItems = (category) => {
-    const items = [];
+
+type CategoryKey = 'dol' | 'place' | 'hanbok';
+
+interface GalleryItem {
+    id: string;
+    category: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    tags: string[];
+    image: string;
+    palette: string;
+}
+
+const makeItems = (category: CategoryKey): GalleryItem[] => {
+    const items: GalleryItem[] = [];
     const categoryImages = images[category];
     const categoryPalettes = palettes[category];
     const categoryTags = tagPools[category];
@@ -141,7 +157,8 @@ const makeItems = (category) => {
     }
     return items;
 };
-export const galleryItems = [
+
+export const galleryItems: GalleryItem[] = [
     ...makeItems('dol'),
     ...makeItems('place'),
     ...makeItems('hanbok'),

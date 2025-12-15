@@ -5,7 +5,7 @@
       <!-- Fullscreen background image -->
       <div class="hero__bg">
         <img
-          src="/images/hero-bg.jpg"
+          :src="`${baseUrl}images/hero-bg.jpg`"
           alt="초연 돌상 스타일링"
           class="hero__bg-img"
         />
@@ -67,7 +67,7 @@
           <div class="philosophy__visual">
             <div class="philosophy__image">
               <img
-                src="/images/4.jpg"
+                :src="`${baseUrl}images/4.jpg`"
                 alt="단아한 상차림"
                 loading="lazy"
               />
@@ -253,8 +253,11 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 import { RouterLink } from 'vue-router';
-import { galleryItems } from '@/data/gallery';
+import { galleryItems } from '@/data/galleryData';
 import { notices } from '@/data/notices';
+
+// Base URL for public assets
+const baseUrl = import.meta.env.BASE_URL;
 
 // ============================================
 // HERO SECTION - Scroll & Reveal
@@ -320,7 +323,7 @@ const services = [
     to: '/gallery/dol',
     title: '돌잔치 스타일링',
     desc: '전통과 현대가 어우러진 품격 있는 돌상 연출',
-    image: '/images/1.jpg',
+    image: `${baseUrl}images/1.jpg`,
     tag: 'Signature',
   },
   {
@@ -328,7 +331,7 @@ const services = [
     to: '/gallery/place',
     title: '장소 협찬',
     desc: '아이와 가족이 빛나는 공간 큐레이션',
-    image: '/images/2.jpg',
+    image: `${baseUrl}images/2.jpg`,
     tag: 'Curation',
   },
   {
@@ -336,7 +339,7 @@ const services = [
     to: '/gallery/hanbok',
     title: '한복 대여',
     desc: '품위 있는 실루엣의 프리미엄 한복',
-    image: '/images/3.png',
+    image: `${baseUrl}images/3.png`,
     tag: 'Premium',
   },
 ];

@@ -122,7 +122,7 @@
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import type { GalleryCategory } from '@/types';
-import { galleryItems } from '@/data/gallery';
+import { galleryItems } from '@/data/galleryData';
 
 const props = defineProps<{ category: GalleryCategory; id: string }>();
 
