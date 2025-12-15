@@ -7,6 +7,7 @@ export interface GalleryItem {
   subtitle: string;
   description: string;
   tags: string[];
+  image: string;
   palette: string;
 }
 

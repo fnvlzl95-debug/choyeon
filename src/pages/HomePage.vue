@@ -25,17 +25,21 @@
         </div>
       </div>
 
-      <!-- Decorative image placeholders -->
+      <!-- Decorative images -->
       <div class="hero__visuals">
         <div class="hero__image hero__image--main">
-          <div class="hero__placeholder" :style="{ background: gradients[0] }">
-            <span class="hero__placeholder-text">돌상 스타일링</span>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1617104678098-de229db51175?w=600&q=80"
+            alt="돌상 스타일링"
+            loading="lazy"
+          />
         </div>
         <div class="hero__image hero__image--sub">
-          <div class="hero__placeholder" :style="{ background: gradients[1] }">
-            <span class="hero__placeholder-text">한복</span>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
+            alt="한복"
+            loading="lazy"
+          />
         </div>
       </div>
 
@@ -64,9 +68,11 @@
           </div>
           <div class="philosophy__visual">
             <div class="philosophy__image">
-              <div class="philosophy__placeholder" :style="{ background: gradients[2] }">
-                <span class="hero__placeholder-text">철학</span>
-              </div>
+              <img
+                src="https://images.unsplash.com/photo-1545048702-79362596cdc9?w=600&q=80"
+                alt="단아한 상차림"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>
@@ -92,9 +98,8 @@
             class="service-card"
           >
             <div class="service-card__image">
-              <div class="service-card__placeholder" :style="{ background: service.gradient }">
-                <span class="service-card__number">{{ service.number }}</span>
-              </div>
+              <img :src="service.image" :alt="service.title" loading="lazy" />
+              <span class="service-card__number">{{ service.number }}</span>
             </div>
             <div class="service-card__content">
               <h3 class="service-card__title">{{ service.title }}</h3>
@@ -137,9 +142,7 @@
             @mouseleave="handleMouseLeave"
           >
             <div class="gallery-card__image">
-              <div class="gallery-card__placeholder" :style="{ background: item.palette }">
-                <span class="hero__placeholder-text">{{ item.title }}</span>
-              </div>
+              <img :src="item.image" :alt="item.title" loading="lazy" />
             </div>
             <div class="gallery-card__content">
               <h3 class="gallery-card__title">{{ item.title }}</h3>
@@ -224,7 +227,7 @@ const services = [
     to: '/gallery/dol',
     title: '돌잔치 스타일링',
     desc: '전통과 현대가 어우러진 품격 있는 돌상 연출',
-    gradient: 'linear-gradient(145deg, #e8dfd2 0%, #d4c4b0 100%)',
+    image: 'https://images.unsplash.com/photo-1606293926075-69a00dbfde81?w=500&q=80',
     number: '01',
   },
   {
@@ -232,7 +235,7 @@ const services = [
     to: '/gallery/place',
     title: '장소 협찬',
     desc: '아이와 가족이 빛나는 공간 큐레이션',
-    gradient: 'linear-gradient(145deg, #ddd0be 0%, #c9b89e 100%)',
+    image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=500&q=80',
     number: '02',
   },
   {
@@ -240,7 +243,7 @@ const services = [
     to: '/gallery/hanbok',
     title: '한복 대여',
     desc: '품위 있는 실루엣의 프리미엄 한복',
-    gradient: 'linear-gradient(145deg, #f4ede3 0%, #e8dfd2 100%)',
+    image: 'https://images.unsplash.com/photo-1580651315530-69c8e0026377?w=500&q=80',
     number: '03',
   },
 ];
@@ -380,7 +383,15 @@ const handleMouseLeave = (e: MouseEvent) => {
 
 .hero__image {
   position: absolute;
-  opacity: 0.4;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.hero__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.95) contrast(1.05);
 }
 
 .hero__image--main {
@@ -519,30 +530,20 @@ const handleMouseLeave = (e: MouseEvent) => {
   aspect-ratio: 4 / 5;
   max-width: 400px;
   margin-inline: auto;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.philosophy__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (min-width: 768px) {
   .philosophy__image {
     transform: translateX(20px);
   }
-}
-
-.philosophy__placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.philosophy__placeholder::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--pattern-hanji);
-  opacity: 0.1;
-  mix-blend-mode: overlay;
 }
 
 /* === SERVICES === */
@@ -570,36 +571,26 @@ const handleMouseLeave = (e: MouseEvent) => {
   position: relative;
 }
 
-.service-card__placeholder {
+.service-card__image img {
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: var(--space-lg);
-  position: relative;
+  object-fit: cover;
   transition: transform var(--duration-slow) var(--ease-out);
 }
 
-.service-card:hover .service-card__placeholder {
-  transform: scale(1.02);
-}
-
-.service-card__placeholder::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--pattern-hanji);
-  opacity: 0.08;
-  mix-blend-mode: overlay;
+.service-card:hover .service-card__image img {
+  transform: scale(1.05);
 }
 
 .service-card__number {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: var(--space-lg);
   font-family: var(--font-display);
   font-size: var(--text-4xl);
-  color: var(--color-ink-soft);
-  opacity: 0.2;
-  position: relative;
+  color: var(--color-white);
+  opacity: 0.8;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   z-index: 1;
 }
 

@@ -1,6 +1,34 @@
 import type { GalleryItem, GalleryCategory } from '@/types';
 
-// Korean traditional color palettes
+// Real images from Unsplash for each category
+const images: Record<GalleryCategory, string[]> = {
+  dol: [
+    'https://images.unsplash.com/photo-1617104678098-de229db51175?w=600&q=80',
+    'https://images.unsplash.com/photo-1606293926075-69a00dbfde81?w=600&q=80',
+    'https://images.unsplash.com/photo-1545048702-79362596cdc9?w=600&q=80',
+    'https://images.unsplash.com/photo-1557053910-d9eadeed1c58?w=600&q=80',
+    'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80',
+    'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=80',
+  ],
+  place: [
+    'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&q=80',
+    'https://images.unsplash.com/photo-1478146896981-b80fe463b330?w=600&q=80',
+    'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&q=80',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80',
+    'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80',
+  ],
+  hanbok: [
+    'https://images.unsplash.com/photo-1580651315530-69c8e0026377?w=600&q=80',
+    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+    'https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&q=80',
+    'https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?w=600&q=80',
+    'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&q=80',
+    'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80',
+  ],
+};
+
+// Korean traditional color palettes (fallback)
 const palettes: Record<GalleryCategory, string[]> = {
   dol: [
     'linear-gradient(145deg, #e8dfd2 0%, #d4c4b0 50%, #c9b89e 100%)',
@@ -96,6 +124,7 @@ const descriptions: Record<GalleryCategory, string> = {
 
 const makeItems = (category: GalleryCategory): GalleryItem[] => {
   const items: GalleryItem[] = [];
+  const categoryImages = images[category];
   const categoryPalettes = palettes[category];
   const categoryTags = tagPools[category];
   const categoryNames = names[category];
@@ -115,6 +144,7 @@ const makeItems = (category: GalleryCategory): GalleryItem[] => {
       subtitle: nameData.subtitle,
       description,
       tags,
+      image: categoryImages[i % categoryImages.length],
       palette: categoryPalettes[i % categoryPalettes.length],
     });
   }

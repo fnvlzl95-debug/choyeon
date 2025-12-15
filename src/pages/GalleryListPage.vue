@@ -78,9 +78,7 @@
             @mouseleave="handleMouseLeave"
           >
             <div class="gallery-card__image">
-              <div class="gallery-card__placeholder" :style="{ background: item.palette }">
-                <span class="gallery-card__placeholder-text">{{ item.title }}</span>
-              </div>
+              <img :src="item.image" :alt="item.title" loading="lazy" />
             </div>
             <div class="gallery-card__content">
               <h3 class="gallery-card__title" v-html="highlightText(item.title)"></h3>
